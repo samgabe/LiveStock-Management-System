@@ -1,0 +1,303 @@
+<div>
+    <label for="name">Name:</label>
+    <input type="text"  name="user_name">
+  </div>
+  <div>
+    <label for="type">E-mail:</label>
+    <input type="text" id="mail" name="user_mail">
+  </div>
+  <div>
+    <label for="mail">E-mail:</label>
+    <input type="email" id="mail" name="user_mail">
+  </div>
+  <div>
+    <label for="mail">E-mail:</label>
+    <input type="email" id="mail" name="user_mail">
+  </div>
+  <div>
+    <label for="mail">E-mail:</label>
+    <input type="email" id="mail" name="user_mail">
+  </div>
+  <div>
+    <label for="mail">E-mail:</label>
+    <input type="email" id="mail" name="user_mail">
+  </div>
+  <div>
+    <label for="mail">E-mail:</label>
+    <input type="email" id="mail" name="user_mail">
+  </div>
+  <div>
+    <label for="msg">Message:</label>
+    <textarea id="msg" name="user_message"></textarea>
+  </div>
+
+
+
+
+
+
+  <?php include('server.php'); 
+  if (empty($_SESSION['username'])) {
+    header('location:login.php');
+  }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User registration system using PHP and MySQl</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <h2>Home page</h2>
+  </div>
+
+  <div class="content">
+    <?php if (isset($_SESSION['success'])): ?>
+      <div class="error success">
+        <h3>
+          <?php
+          echo $_SESSION['success'];
+          unset($_SESSION['success']);
+          ?>
+        </h3>
+      </div>
+    <?php endif ?>
+
+    <?php if (isset($_SESSION['username'])):   ?>
+      <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+      <p><a href="index.php?logout='1'" style="color: red;">Logout</a></p>
+    <?php endif ?>
+  </div>
+
+</body>
+</html>
+
+
+
+
+<p style="float: right;padding-right: 12px;">Welcome <strong><?php echo $_SESSION['username']; ?></strong></p><br
+
+
+
+$connection = mysql_connect('localhost', 'root', ''); //The Blank string is the password
+mysql_select_db('hrmwaitrose');
+
+$query = "SELECT * FROM employee"; //You don't need a ; like you do in SQL
+$result = mysql_query($query);
+
+echo "<table>"; // start a table tag in the HTML
+
+while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
+echo "<tr><td>" . $row['name'] . "</td><td>" . $row['age'] . "</td></tr>";  //$row['index'] the index here is a field name
+}
+
+echo "</table>"; //Close the table in HTML
+
+mysql_close(); //Make sure to close out the database connection
+
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT id, firstname, lastname FROM MyGuests";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<br> id: ". $row["id"]. " - Name: ". $row["firstname"]. " " . $row["lastname"] . "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?> 
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT id, firstname, lastname FROM MyGuests";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
+mysqli_close($conn);
+?> 
+
+</body>
+</html>
+
+
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+// sql to delete a record
+$sql = "DELETE FROM MyGuests WHERE id=3";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record deleted successfully";
+} else {
+    echo "Error deleting record: " . $conn->error;
+}
+
+$conn->close();
+?>
+
+
+<?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "myDB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "UPDATE MyGuests SET lastname='Doe' WHERE id=2";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $conn->error;
+}
+
+$conn->close();
+?>
+
+
+
+CREATE TABLE pasture (
+id INT(50) AUTO_INCREMENT PRIMARY KEY,
+pasture VARCHAR(255),
+state VARCHAR(255),
+moisture VARCHAR(255),
+season VARCHAR(255),
+number VARCHAR(255),
+salts VARCHAR(255),
+water VARCHAR(255)
+)
+
+
+          <form class="needs-validation" novalidate method="post" action="action1.php">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Pasture Type">Pasture Type</label>
+                <input type="text" class="form-control" name="pasture" placeholder="" value="" required>
+
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="State of the Pasture">State of the Pasture</label>
+                <input type="text" class="form-control" name="state" placeholder="" value="" required>
+                
+              </div>
+            </div>
+
+            
+
+            <div class="mb-3">
+              <label for="Moisture content of Pasture">Moisture content of Pasture</label>
+              <input type="text" class="form-control" name="moisture" placeholder="" required>
+             
+            </div>
+
+            <div class="mb-3">
+              <label for="Pasture Season">Pasture Season </label>
+              <input type="text" class="form-control" name="season" placeholder="">
+            </div>
+
+            <div class="row">
+
+
+              <div class="col-md-3 mb-3">
+                <label for="Area of Pasture intake">Area of Pasture intake </label>
+                <input type="text" class="form-control" name="intake" placeholder="" required>
+
+              </div>
+            </div>
+            
+
+        <h4 class="mb-3">Commercial Feeds</h4>
+
+              <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Type of Supplement feed">Type of Supplement feed</label>
+                <input type="text" class="form-control" name="feeds" placeholder="" value="" required>
+
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="Quantity of Supplement">Quantity of Supplement </label>
+                <input type="text" class="form-control" name="amount" placeholder="" value="" required>
+                
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="Mineral & salts intake">Mineral & salts intake</label>
+                <input type="text" class="form-control" name="salts" placeholder="" required>
+              
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="Water intake">Water intake</label>
+                <input type="text" class="form-control" name="water" placeholder="" required>
+               
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" name="register">Create Pasture Record</button>
+          </form>
